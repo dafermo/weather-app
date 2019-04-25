@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" initial>
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<script type="text/javascript" src="jquery-2.2.4.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.4.5.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+	
+
+
+<title>Weather App Deiviwis</title>
+
+</head>
+
+
+
+
+<body>
+
+	<!-- pagina 1 -->
+	<div id="main" data-role="page">
+			<a href="#lista">back</a>
+		
+		<div id="tiempo"></div>
+				
+			<img id="fototiempo" alt=" ">
+			<div id="donde">
+				<p id="ciudad"></p>
+				<p id="descripcion"></p>
+			
+			</div>
+	
+		<!-- <div id="mapa"></div> -->
+		
+		<div id="datos">
+
+			<div class="info"><img src="" class="uno" alt=""/><p id="theo"></p></div>
+			<div id="mas">
+
+				<div class="info">
+					<div class="dos"><img src="" alt=""/><p id="tmax"></p></div>
+					<div class="dos"><img src="" alt=""/><p id="tmin"></p></div>
+				</div>
+
+				<div class="info">
+					  <div class="dos"><img src="" alt=""/> <p id="hum"></p></div>
+					  <div class="dos"><img src="" alt=""/> <p id="viento"></p></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- pagina 2 -->
+
+
+	<div data-role="page" data-theme="c" id="lista">
+		<div data-role="header">
+			
+			<h1>Lista ciudades</h1>
+			
+		</div>
+		<div id="searcher">
+				<form id="listview" class="ui-filterable"> 
+				<input id="autocomplete-input" data-type="search" placeholder="Busca una ciudad...">
+				
+
+				</form>
+				
+
+				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
+				
+		</div>	
+
+			<ul data-role="listview" data-inset="true" id="listaciudades">
+				<li><a href="#">
+					<div id="donde">
+						<p id="ciudad"></p>
+						<p id="descripcion"></p>
+								
+					</div>
+					
+				 </li>
+			</ul>
+	
+	</div>
+
+
+
+</body>
+</html>
