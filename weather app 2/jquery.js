@@ -95,44 +95,121 @@ $(document).on("mobileinit", function(){
 		        }
 		    });
 
+		// HAY QUE TENER UN ARRAY CON TODAS LAS CIUDADES
+
+
+		var localData = JSON.parse(localStorage.getItem('datos'));
+	
+
+		if (localData != null) {
+
+			$.each(localData, function( index, value ) {
+			
+			let ciudad = "<li><a href='#'>" + localData[index] + "</a></li>";
+			$("#listaciudades").append(ciudad);
+			$("#listaciudades").listview( "refresh" );
+			  });
+		}
+
+			  
+		
+
+		// traer datos de localStorage 
 
 		// recoger datos de la ciudad cuando la clickas
 
-		$('ul').on('click', 'li', function() {
-			
-			$.ajax({
-				url: "http://api.openweathermap.org/data/2.5/weather?appid=8d95980ea77ed071e770126d777bde48",
-				data: {
-					q: $(this).text()
+	  $("#autocomplete").on('click', 'li', function() {
+				
+		
+		// pintar la ciudad en el html
+		
+				let ciudad = "<li><a href='#'>" + $(this).text() + "</a></li>";
+				$("#listaciudades").append(ciudad);
+				$("#listaciudades").listview( "refresh" );
+
+			//	localStorage ///////////////////////////////////////////////////////////////////////////////////// 
+
+				// traer datos de localStorage, y guardar el nuevo dato.
+
+				// traemos datos
+
+				var localData = JSON.parse(localStorage.getItem('datos'));
+
+				if (localData == null) {
+
+				localData = [];
+
 				}
 
-		// pintar la ciudad en el html
+				localData.push($(this).text());
+				localStorage.setItem('datos', JSON.stringify(localData));
 
 
-			})
-			
-			.then( function ( response ) {
-		
-				// aqui en vez de console log va un append con .html que pinte el div
+		//				var cityToStore = JSON.stringify(this);
 
-				console.log(response);
-				
-				// me dice que c is not defined; ??????????????????
+		//				
 
-				$("#ciudad").html(c);
-				$("#descripcion").html(d);
-				$("#theo").html(t+'º');
-				
-				
-			});
-			
-			
-			
-			
-			
+		//				var bramido = JSON.parse(localStorage.getItem('someCity1'));
+
+		//				localData.push(cityToStore);
+
+										
+						$.ajax({
+							url: "http://api.openweathermap.org/data/2.5/weather?appid=8d95980ea77ed071e770126d777bde48",
+							data: {
+								q: $(this).text()},
+								success: function (response) {
+
+								}
+						})
+						
+						.then( function ( response ) {
+						
+							console.log(response);
+							
+						});
+								
 		});
 
 
-});
+		///////////////////////// ir a vista ciudad con los datos nuevos
 
-});
+		$("#listaciudades").on('click', 'li', function() {
+
+			$.mobile.changePage("#main", {transition: "slideup"});
+			
+
+					$.ajax({
+					url: "http://api.openweathermap.org/data/2.5/weather?appid=8d95980ea77ed071e770126d777bde48",
+					data: { q: $(this).text(), units: "metric" },
+					success: function (response) {
+
+						console.log(response); 
+						
+						var fecha = new Date();
+						var dias = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
+						$("#dia").html(dias[fecha.getDay()]);
+						$("#temp").html(parseInt(response.main.temp) + "º");
+						$("#ciudad").html(response.name);
+						$("#pais").html(response.sys.country);
+						$("#tiempo").html(response.weather[0].description.toUpperCase());
+						$("#icono").attr("src","/iconos/"+response.weather[0].icon+".png");
+						$("#humedad").html("HUMEDAD " + response.main.humidity + "%");
+						$("#viento").html("VIENTO " + response.wind.speed + "m/s");
+						$("#temMinMax").html("MIN/MAX " + parseInt(response.main.temp_min) + "º " + " / " + parseInt(response.main.temp_max) + "º");
+						
+					},
+					error: function(textStatus, errorThrown ){
+						alert("¡Ups! Ha habido un error: " + errorThrown);
+					}
+				});
+			});
+
+	// pintar la ciudad en el html
+
+
+
+
+
+		});
+	});
