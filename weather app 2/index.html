@@ -7,12 +7,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width" initial>
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.css">
+
 <script type="text/javascript" src="jquery-2.2.4.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jquery.mobile-1.4.5.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 
 
 
@@ -26,15 +27,15 @@
 <body>
 
 	<!-- pagina 1 -->
-	<div id="main" data-role="page">
-			<a href="#lista">back</a>
+	<div id="main" data-role="page"data-theme="c">
+			<a class="ui-btn"href="#lista">Volver</a>
 		
-		<div id="tiempo"></div>
-				
-			<img id="fototiempo" alt=" ">
+			<div><p class="texto text18 centrado centro pad" id="dia"></p></div>
+			
 			<div id="donde">
-				<p id="ciudad"></p>
-				<p id="descripcion"></p>
+				<p data-role="" id="ciudad" class="pad texto text18 centro centrado textogordo">
+				</p>
+				<p class="texto text32 centro centrado" id="descripcion"></p>
 			
 			</div>
 	
@@ -42,43 +43,54 @@
 		
 		<div id="datos">
 
-			<div class="info"><img src="" class="uno" alt=""/><p id="theo"></p></div>
+			<div class="info"><p class="texto text94 centro centro" id="theo"></p></div>
 			<div id="mas">
 
 				<div class="info">
-					<div class="dos"><img src="" alt=""/><p id="tmax"></p></div>
-					<div class="dos"><img src="" alt=""/><p id="tmin"></p></div>
+					<div class="dos">
+						<p class="centro texto text14 " id="temMinMax"></p>
+					</div>
+					<div class="dos">
+						
+					</div>
 				</div>
 
 				<div class="info">
-					  <div class="dos"><img src="" alt=""/> <p id="hum"></p></div>
-					  <div class="dos"><img src="" alt=""/> <p id="viento"></p></div>
+
+					  <div class="texto text11 centrado">
+						  <p class="texto text18 centro" id="hum"></p>
+						</div>
+					  <div class="texto text11 centrado">
+						  <p class="texto text18 centro" id="viento"></p>
+						</div>
 				</div>
 
 			</div>
 		</div>
+
+
 	</div>
 
 	<!-- pagina 2 -->
 
 
 	<div data-role="page" data-theme="c" id="lista">
-		<div data-role="header">
+		<div class=" texto text18 centro" data-role="header">
 			
-			<h1>Lista ciudades</h1>
+			<p class="texto text18 centro">Lista ciudades</p>
 			
 		</div>
 		<div id="searcher">
-				<form id="listview" class="ui-filterable"> 
-				<input id="autocomplete-input" data-type="search" placeholder="Busca una ciudad...">
+				<form id="listview" class="ui-filterable texto"> 
+				<input class="texto" id="autocomplete-input" data-type="search" placeholder="Busca una ciudad...">
 				</form>
 				
 
-				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
+				<ul class="texto" id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
 				
 		</div>	
 
-			<ul id="listaciudades" data-role="listview" data-inset="true" id="listaciudades">
+			<ul class="texto" id="listaciudades" data-role="listview" data-inset="true" id="listaciudades" class="ui-link ui-corner-all">
 				
 			</ul>
 	

@@ -28,31 +28,41 @@ $(document).on("mobileinit", function(){
 		$.ajax({
     		url: 'http://api.openweathermap.org/data/2.5/weather?appid=8d95980ea77ed071e770126d777bde48',
     		data: { lat:latitud, lon:longitud },
-			success: function (tiempo) {
-      			console.log(tiempo);
-      			var icono = tiempo.weather[0].icon;
-      			var t = tiempo.main.temp-272.15;
-      			t = t.toFixed(2); 
-      			var h = tiempo.main.humidity;
-      			var t_min = tiempo.main.temp_min-272.15;
-      			t_min = t_min.toFixed(2);
-      			var t_max = tiempo.main.temp_max-272.15;
-     			t_max = t_max.toFixed(2);
-				var v = tiempo.wind.speed;
-				var c = tiempo.name;
-				var d = tiempo.weather[0].description; //????????
+			success: function (response) {
+     // 			console.log(tiempo);
+     // 			var t = tiempo.main.temp-272.15;
+     // 			t = t.toFixed(2); 
+     // 			var h = tiempo.main.humidity;
+     // 			var t_min = tiempo.main.temp_min-272.15;
+     // 			t_min = t_min.toFixed(2);
+     // 			var t_max = tiempo.main.temp_max-272.15;
+     //			t_max = t_max.toFixed(2);
+	//			var v = tiempo.wind.speed;
+	//			var c = tiempo.name;
+	//			var d = tiempo.weather[0].description; //????????
+	//			var p = response.sys.country
 
+			
+	var fecha = new Date();
+	var dias = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
+	$("#dia").html(dias[fecha.getDay()]);
+	$("#theo").html(parseInt(response.main.temp-272.15) + "º");
+	$("#ciudad").html(response.name + "," + response.sys.country);
+	
+	$("#descripcion").html(response.weather[0].description.toUpperCase());
+	$("#icono").attr("src","/iconos/"+response.weather[0].icon+".png");
+	$("#humedad").html("HUMEDAD " + response.main.humidity + "%");
+	$("#viento").html("VIENTO " + response.wind.speed + "m/s");
+	$("#temMinMax").html("MIN/MAX " + parseInt(response.main.temp_min-272.15) + "º " + " / " + parseInt(response.main.temp_max-272.15) + "º");
+	
 
-
-
-				$("#fototiempo").attr('src', icono +'.svg');
-				$("#ciudad").html(c);
-				$("#descripcion").html(d);
-				$("#theo").html(t+'º');
-				$("#hum").html(h+'%');
-				$("#tmax").html(t_max+'º');
-				$("#tmin").html(t_min+'º');
-				$("#viento").html(v+'Km/h');
+			//	$("#fototiempo").attr('src', icono +'.svg');
+			//	$("#ciudad").html(c);
+			//	$("#descripcion").html(d);
+			//	$("#theo").html(t+'º');
+			//	$("#hum").html(h+'%');
+			//	$("#temMinMax").html('Min/Max' +t_min + 'º' + ' ' +t_max + 'º');
+			//	$("#viento").html(v+'Km/h');
 
 				
     		},
@@ -107,11 +117,11 @@ $(document).on("mobileinit", function(){
 			
 			let ciudad = "<li><a href='#'>" + localData[index] + "</a></li>";
 			$("#listaciudades").append(ciudad);
-			$("#listaciudades").listview( "refresh" );
+			
 			  });
 		}
 
-			  
+		
 		
 
 		// traer datos de localStorage 
@@ -189,12 +199,12 @@ $(document).on("mobileinit", function(){
 						var fecha = new Date();
 						var dias = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
 						$("#dia").html(dias[fecha.getDay()]);
-						$("#temp").html(parseInt(response.main.temp) + "º");
-						$("#ciudad").html(response.name);
-						$("#pais").html(response.sys.country);
-						$("#tiempo").html(response.weather[0].description.toUpperCase());
-						$("#icono").attr("src","/iconos/"+response.weather[0].icon+".png");
-						$("#humedad").html("HUMEDAD " + response.main.humidity + "%");
+						$("#theo").html(parseInt(response.main.temp) + "º");
+						$("#ciudad").html(response.name + "," + response.sys.country);
+						
+						$("#descripcion").html(response.weather[0].description.toUpperCase());
+						
+						$("#hum").html("HUMEDAD " + response.main.humidity + "%");
 						$("#viento").html("VIENTO " + response.wind.speed + "m/s");
 						$("#temMinMax").html("MIN/MAX " + parseInt(response.main.temp_min) + "º " + " / " + parseInt(response.main.temp_max) + "º");
 						
@@ -204,9 +214,6 @@ $(document).on("mobileinit", function(){
 					}
 				});
 			});
-
-	// pintar la ciudad en el html
-
 
 
 
